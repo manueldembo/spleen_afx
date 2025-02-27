@@ -1,10 +1,11 @@
 import { randomUUID } from 'crypto';
 
-export class PlayList {
+export class Playlist {
   id: string;
   name: string;
   category: string;
   ownerId: string;
+  songs: string[] = [];
 
   constructor(
     id: string | null,
@@ -16,5 +17,6 @@ export class PlayList {
     this.name = name;
     this.category = description;
     this.ownerId = userId;
+    this.songs = [];
   }
 }

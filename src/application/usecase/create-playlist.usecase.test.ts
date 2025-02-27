@@ -1,14 +1,14 @@
 import { test, describe } from 'vitest';
 import { CreatePlaylistUsecase } from './create-playlist.usecase';
-import { PlayListRepository } from 'src/domain/repositores/playlist-repository.interface';
-import { FakePlayListRepository } from 'test/fake-playlist.repository';
+import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
+import { FakePlaylistRepository } from 'test/fake-playlist.repository';
 
 describe('CreatePlaylistUsecase', () => {
   let sut: CreatePlaylistUsecase;
-  let playlistRepository: PlayListRepository;
+  let playlistRepository: PlaylistRepository;
 
   beforeEach(() => {
-    playlistRepository = new FakePlayListRepository();
+    playlistRepository = new FakePlaylistRepository();
     sut = new CreatePlaylistUsecase(playlistRepository);
   });
 

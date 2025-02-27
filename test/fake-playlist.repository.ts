@@ -1,14 +1,14 @@
-import { PlayList } from 'src/domain/entities/playlist';
-import { PlayListRepository } from 'src/domain/repositores/playlist-repository.interface';
+import { Playlist } from 'src/domain/entities/playlist';
+import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
 
-export class FakePlayListRepository implements PlayListRepository {
-  private playlists: PlayList[] = [];
+export class FakePlaylistRepository implements PlaylistRepository {
+  private playlists: Playlist[] = [];
 
-  async create(playlist: PlayList): Promise<void> {
+  async save(playlist: Playlist): Promise<void> {
     this.playlists.push(playlist);
   }
 
-  async findAll(): Promise<PlayList[]> {
+  async findAll(): Promise<Playlist[]> {
     return this.playlists;
   }
 }

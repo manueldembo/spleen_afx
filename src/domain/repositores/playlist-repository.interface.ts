@@ -1,6 +1,6 @@
-import { PlayList } from '../entities/playlist';
+import { Playlist } from '../entities/playlist';
 
-export interface PlayListRepository {
-  create(playlist: PlayList): Promise<void>;
-  findAll(): Promise<PlayList[]>;
+export interface PlaylistRepository {
+  save(playlist: Playlist): Promise<void>;
+  findAll(): Promise<Playlist[]>;
 }

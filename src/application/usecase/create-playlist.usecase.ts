@@ -1,18 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { PlayList } from 'src/domain/entities/playlist';
-import { PlayListRepository } from 'src/domain/repositores/playlist-repository.interface';
+import { Inject, Injectable } from '@nestjs/common';
+import { Playlist } from 'src/domain/entities/playlist';
+import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
 import { BadRequestError } from '../helpers/http.helper';
 
 @Injectable()
 export class CreatePlaylistUsecase {
-  constructor(private readonly playlistRepository: PlayListRepository) {}
+  constructor(
+    @Inject('PlaylistRepository')
+    private readonly playlistRepository: PlaylistRepository,
+  ) {}
 
   async execute(
     name: string,
     category: string,
     ownerId: string,
   ): Promise<void> {
-    const playlist = new PlayList(null, name, category, ownerId);
+    const playlist = new Playlist(null, name, category, ownerId);
 
     const playlists = await this.playlistRepository.findAll();
 
@@ -22,6 +25,6 @@ export class CreatePlaylistUsecase {
     );
     if (playlistAlreadyExists) throw BadRequestError('Playlist already exists');
 
-    await this.playlistRepository.create(playlist);
+    await this.playlistRepository.save(playlist);
   }
 }
