@@ -1,5 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
+import { NotFoundError } from '../helpers/http.helper';
 
 export class UpdatePlaylistUseCase {
   constructor(
@@ -13,6 +14,12 @@ export class UpdatePlaylistUseCase {
     name: string,
     category: string,
   ): Promise<void> {
-    await this.playlistRepository.update(id, ownerId, name, category);
+    const playList = await this.playlistRepository.findById(id);
+    if (!playList) throw NotFoundError('Playlist not found');
+
+    playList.name = name;
+    playList.category = category;
+
+    await this.playlistRepository.update(playList);
   }
 }

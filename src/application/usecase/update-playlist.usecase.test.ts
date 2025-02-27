@@ -25,4 +25,15 @@ describe('UpdatePlaylistUsecase', () => {
     expect(playlists?.name).toBe(name);
     expect(playlists?.category).toBe(category);
   });
+
+  test('Should return an error if playlist does not exist', async () => {
+    const name = 'New playlist name';
+    const category = 'New category';
+    const id = '2';
+    const ownerId = '1';
+
+    await expect(sut.execute(id, ownerId, name, category)).rejects.toThrow(
+      'Playlist not found',
+    );
+  });
 });
