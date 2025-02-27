@@ -14,7 +14,7 @@ export class SearchMusicUseCase {
   ) {}
 
   async execute(
-    { query = '', artist = '' }: Filter,
+    { query = '', artist = '', genre = '' }: Filter,
     page = 1,
     perPage = 12,
   ): Promise<ListResult<Music>> {
@@ -28,6 +28,7 @@ export class SearchMusicUseCase {
     const musics = await this.musicRepository.search({
       query: query.toLowerCase(),
       artist: artist.toLowerCase(),
+      genre: genre.toLowerCase(),
     });
 
     const totalItems = musics.length;

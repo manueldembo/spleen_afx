@@ -7,4 +7,5 @@ export interface MusicRepository {
 export interface Filter {
   query: string;
   artist: string;
+  genre: string;
 }

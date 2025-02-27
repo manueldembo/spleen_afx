@@ -16,6 +16,7 @@ describe('SearchMusicUsecase', () => {
     const filters = {
       query: 'love',
       artist: '',
+      genre: '',
     };
     const result = await sut.execute(filters);
     expect(result.data.length).toBe(3);
@@ -25,6 +26,7 @@ describe('SearchMusicUsecase', () => {
     const filters = {
       query: 'love',
       artist: '',
+      genre: '',
     };
 
     const result = await sut.execute(filters);
@@ -35,10 +37,11 @@ describe('SearchMusicUsecase', () => {
     expect(result.total).toBe(1);
   });
 
-  test('Should search by artist', async () => {
+  test('Should filter by artist', async () => {
     const filters = {
       query: '',
       artist: 'Bonga',
+      genre: '',
     };
 
     const result = await sut.execute(filters, 1, 12);
@@ -49,6 +52,24 @@ describe('SearchMusicUsecase', () => {
     );
     expect(result.data[1].artist.toLowerCase()).toBe(
       filters.artist.toLowerCase(),
+    );
+  });
+
+  test('should filter by genre', async () => {
+    const filters = {
+      query: '',
+      artist: '',
+      genre: 'Rock',
+    };
+
+    const result = await sut.execute(filters, 1, 12);
+
+    expect(result.data.length).toBe(2);
+    expect(result.data[0].genre.toLowerCase()).toBe(
+      filters.genre.toLowerCase(),
+    );
+    expect(result.data[1].genre.toLowerCase()).toBe(
+      filters.genre.toLowerCase(),
     );
   });
 });
