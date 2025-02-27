@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 export class PlayList {
   id: string;
   name: string;
-  description: string;
+  category: string;
   ownerId: string;
 
   constructor(
@@ -14,7 +14,7 @@ export class PlayList {
   ) {
     this.id = id ?? randomUUID();
     this.name = name;
-    this.description = description;
+    this.category = description;
     this.ownerId = userId;
   }
 }

@@ -21,4 +21,16 @@ describe('CreatePlaylistUsecase', () => {
 
     expect(result).toBeUndefined();
   });
+
+  test('Should return an error if playlist already exists', async () => {
+    const name = 'My playlist';
+    const category = 'Rock';
+    const ownerId = '1';
+
+    await sut.execute(name, category, ownerId);
+
+    await expect(sut.execute(name, category, ownerId)).rejects.toThrow(
+      'Playlist already exists',
+    );
+  });
 });

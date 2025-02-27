@@ -7,4 +7,8 @@ export class FakePlayListRepository implements PlayListRepository {
   async create(playlist: PlayList): Promise<void> {
     this.playlists.push(playlist);
   }
+
+  async findAll(): Promise<PlayList[]> {
+    return this.playlists;
+  }
 }
