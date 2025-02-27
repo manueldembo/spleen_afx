@@ -1,14 +1,23 @@
 import { Music } from 'src/domain/entities/music';
-import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
+import {
+  Filter,
+  MusicRepository,
+} from 'src/domain/repositores/music-repository.interface';
 import { prismaClient } from '../prisma.client';
 
 export class MusicRepositoryPostgres implements MusicRepository {
-  async search(query: string): Promise<Music[]> {
+  async search(filters: Filter): Promise<Music[]> {
     const result = await prismaClient.music.findMany({
       where: {
         fullText: {
-          contains: query,
+          contains: filters.query,
           mode: 'insensitive',
+        },
+        AND: {
+          fullText: {
+            contains: filters.artist,
+            mode: 'insensitive',
+          },
         },
       },
     });
