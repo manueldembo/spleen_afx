@@ -26,4 +26,12 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
       );
     });
   }
+
+  async delete(playlistId: string): Promise<void> {
+    await prismaClient.playList.delete({
+      where: {
+        id: playlistId,
+      },
+    });
+  }
 }
