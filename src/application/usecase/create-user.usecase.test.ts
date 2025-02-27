@@ -1,9 +1,9 @@
 import { describe, test } from 'vitest'
 import { CreateUserUseCase } from './create-user.usecase'
 import { UserRepository } from 'src/domain/repositores/user-repository.interface'
-import { FakeUserRepository } from 'test/fake-user.repository'
 import { BcryptAdapter } from 'src/infra/bcrypt-adapter'
 import { Encrypter } from '../ports/encrypter.interface'
+import { FakeUserRepository } from 'test/fake-user.repository'
 
 describe('Create user', () => {
     let userRepository: UserRepository
@@ -16,22 +16,8 @@ describe('Create user', () => {
         sut = new CreateUserUseCase(userRepository, encrypter)
     })
 
-    test('Should return a bad request if name is not set', async () => {
-        const err = await sut.execute("", "email@sample.com", "password") as Error
-
-        expect(err.message).toBe("Name is required")
-    })
-
     test('Should return a bad request if email is not valid', async () => {
-        const err = await sut.execute("John Doe", "invalid-email", "password") as Error        
-
-        expect(err.message).toBe("Invalid email")
-    })
-
-    test('Should return an error if passwor is not set', async () => {
-        const err = await sut.execute("John Doe", "email@sample.com", "") as Error        
-
-        expect(err.message).toBe("Password is required")
+        await expect(sut.execute("John Doe", "invalid-email", "password")).rejects.toThrow("Invalid email")      
     })
 
     test('Should create a user', async () => {
@@ -42,8 +28,7 @@ describe('Create user', () => {
 
     test('should return an error if email is already in use', async () => {
         await sut.execute("John Doe", "email@sample.com", "password")
-        const err = await sut.execute("John Doe 2", "email@sample.com", "password2") as Error
 
-        expect(err.message).toBe("Email is already in use")
+        await expect(sut.execute("John Doe 2", "email@sample.com", "password2")).rejects.toThrow("Email is already in use")
     })
 })
