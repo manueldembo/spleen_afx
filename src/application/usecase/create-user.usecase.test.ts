@@ -5,7 +5,7 @@ describe('Create user', () => {
     test('Should return a bad request if name is not set', async () => {
         const sut = new CreateUserUseCase()
 
-        const err = await sut.execute("", "email@sample.com") as Error
+        const err = await sut.execute("", "email@sample.com", "password") as Error
 
         expect(err.message).toBe("Name is required")
     })
@@ -13,8 +13,16 @@ describe('Create user', () => {
     test('Should return a bad request if email is not valid', async () => {
         const sut = new CreateUserUseCase()
 
-        const err = await sut.execute("John Doe", "invalid-email") as Error        
+        const err = await sut.execute("John Doe", "invalid-email", "password") as Error        
 
         expect(err.message).toBe("Invalid email")
+    })
+
+    test('Should return an error if passwor is not set', async () => {
+        const sut = new CreateUserUseCase()
+
+        const err = await sut.execute("John Doe", "email@sample.com", "") as Error        
+
+        expect(err.message).toBe("Password is required")
     })
 })
