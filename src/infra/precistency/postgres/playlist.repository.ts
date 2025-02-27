@@ -34,4 +34,33 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
       },
     });
   }
+
+  async findById(playlistId: string): Promise<Playlist | undefined> {
+    const playlist = await prismaClient.playList.findUnique({
+      where: {
+        id: playlistId,
+      },
+    });
+
+    if (!playlist) return undefined;
+
+    return new Playlist(
+      playlist.id,
+      playlist.name,
+      playlist.category,
+      playlist.ownerId,
+    );
+  }
+
+  async update(playlist: Playlist): Promise<void> {
+    await prismaClient.playList.update({
+      where: {
+        id: playlist.id,
+      },
+      data: {
+        name: playlist.name,
+        category: playlist.category,
+      },
+    });
+  }
 }

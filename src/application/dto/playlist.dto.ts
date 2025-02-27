@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreatePlaylistDTO {
+export class PlaylistDTO {
   @IsNotEmpty()
   @IsString()
   name: string;

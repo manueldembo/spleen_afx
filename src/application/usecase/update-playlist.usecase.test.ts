@@ -16,7 +16,6 @@ describe('UpdatePlaylistUsecase', () => {
     const name = 'New playlist name';
     const category = 'New category';
     const id = '1';
-    const ownerId = '1';
 
     await sut.execute(id, name, category);
 

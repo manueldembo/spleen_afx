@@ -4,12 +4,14 @@ import { CreatePlaylistUsecase } from 'src/application/usecase/create-playlist.u
 import { PlaylistRepositoryPostgres } from '../precistency/postgres/playlist.repository';
 import { JWTGuard } from '../jwt.guard';
 import { DeletePlaylistUseCase } from 'src/application/usecase/delte-playlist.usecase';
+import { UpdatePlaylistUseCase } from 'src/application/usecase/update-playlist.usecase';
 
 @Module({
   controllers: [PlaylistController],
   providers: [
     CreatePlaylistUsecase,
     DeletePlaylistUseCase,
+    UpdatePlaylistUseCase,
     {
       provide: 'PlaylistRepository',
       useClass: PlaylistRepositoryPostgres,
