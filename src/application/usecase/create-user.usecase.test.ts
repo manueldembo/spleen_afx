@@ -12,7 +12,7 @@ describe('Create user', () => {
 
     beforeEach(() => {
         userRepository = new FakeUserRepository()
-        encrypter = new BcryptAdapter(12)
+        encrypter = new BcryptAdapter()
         sut = new CreateUserUseCase(userRepository, encrypter)
     })
 

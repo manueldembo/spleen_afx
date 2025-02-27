@@ -24,7 +24,7 @@ export class CreateUserUseCase {
         if (emailOrError instanceof Error)
             return emailOrError
 
-        const hashedPassword = await this.encrypter.encrypt(password)
+        const hashedPassword = await this.encrypter.encrypt(password, 10)
 
         const emailExists = await this.userRepository.findByEmail(email)
         if (emailExists)
