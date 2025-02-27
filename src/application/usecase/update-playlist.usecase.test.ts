@@ -18,7 +18,7 @@ describe('UpdatePlaylistUsecase', () => {
     const id = '1';
     const ownerId = '1';
 
-    await sut.execute(id, ownerId, name, category);
+    await sut.execute(id, name, category);
 
     const playlists = await playlistRepository.findById(id);
     expect(playlists).toHaveLength;
@@ -30,9 +30,8 @@ describe('UpdatePlaylistUsecase', () => {
     const name = 'New playlist name';
     const category = 'New category';
     const id = '2';
-    const ownerId = '1';
 
-    await expect(sut.execute(id, ownerId, name, category)).rejects.toThrow(
+    await expect(sut.execute(id, name, category)).rejects.toThrow(
       'Playlist not found',
     );
   });

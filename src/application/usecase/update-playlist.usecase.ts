@@ -8,12 +8,7 @@ export class UpdatePlaylistUseCase {
     private readonly playlistRepository: PlaylistRepository,
   ) {}
 
-  async execute(
-    id: string,
-    ownerId: string,
-    name: string,
-    category: string,
-  ): Promise<void> {
+  async execute(id: string, name: string, category: string): Promise<void> {
     const playList = await this.playlistRepository.findById(id);
     if (!playList) throw NotFoundError('Playlist not found');
 
