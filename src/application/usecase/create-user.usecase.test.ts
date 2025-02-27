@@ -1,7 +1,7 @@
 import { describe, test } from 'vitest'
 import { CreateUserUseCase } from './create-user.usecase'
 import { UserRepository } from 'src/domain/repositores/user-repository.interface'
-import { FakeUserRepository } from 'test/fake-user-repository.interface'
+import { FakeUserRepository } from 'test/fake-user.repository'
 import { BcryptAdapter } from 'src/infra/bcrypt-adapter'
 import { Encrypter } from '../ports/encrypter.interface'
 
