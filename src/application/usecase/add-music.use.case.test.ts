@@ -30,9 +30,20 @@ describe('AddMusicUseCase', () => {
     const playlistId = '1';
     const musicId = '1';
 
-    await sut.execute(playlistId, '1');
+    await sut.execute(playlistId, musicId);
 
     const playlist = await playlistRepository.findById(playlistId);
     expect(playlist?.songs[0]).toBe(musicId);
+  });
+
+  test('Should return an error if music already exist in playlist', async () => {
+    const playlistId = '1';
+    const musicId = '1';
+
+    await sut.execute(playlistId, musicId);
+
+    await expect(sut.execute(playlistId, musicId)).rejects.toThrow(
+      'This music already exist in this playlist',
+    );
   });
 });

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
-import { NotFoundError } from '../helpers/http.helper';
+import { BadRequestError, NotFoundError } from '../helpers/http.helper';
 import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
 
 @Injectable()
@@ -18,6 +18,10 @@ export class AddMusicUseCase {
 
     const playlistFound = await this.playlistRepository.findById(playlistId);
     if (!playlistFound) throw NotFoundError('Playlist not found');
+
+    const exist = playlistFound.songs.some((s) => s === musicFound.id);
+    if (exist)
+      throw BadRequestError('This music already exist in this playlist');
 
     await this.playlistRepository.addMusic(playlistFound.id, musicFound.id);
   }
