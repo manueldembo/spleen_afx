@@ -23,4 +23,13 @@ export class FakeMusicRepository implements MusicRepository {
         m.fullText.includes(filter.artist),
     );
   }
+
+  async findById(id: string): Promise<Music | undefined> {
+    return this.musics.find((m) => m.id === id);
+  }
+
+  async update(music: Music): Promise<void> {
+    const index = this.musics.findIndex((p) => p.id === music.id);
+    this.musics[index] = music;
+  }
 }

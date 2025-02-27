@@ -5,6 +5,7 @@ export class Music {
   genre: string;
   releaseYear: number;
   popularity: number;
+  fileUrl?: string;
   fullText: string;
 
   constructor(
@@ -14,6 +15,7 @@ export class Music {
     genre: string,
     releaseYear: number,
     popularity: number,
+    fileUrl?: string,
   ) {
     this.id = id;
     this.title = title;
@@ -22,5 +24,6 @@ export class Music {
     this.releaseYear = releaseYear;
     this.popularity = popularity;
     this.fullText = `${title.toLowerCase()} ${artist.toLowerCase()} ${genre.toLowerCase()} ${releaseYear}`;
+    this.fileUrl = fileUrl;
   }
 }
