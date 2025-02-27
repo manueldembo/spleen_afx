@@ -14,7 +14,17 @@ describe('SearchMusicUsecase', () => {
 
   test('Should return a list of musics', async () => {
     const query = 'love';
-    const musics = await sut.execute(query);
-    expect(musics.length).toBe(3);
+    const result = await sut.execute(query);
+    expect(result.data.length).toBe(3);
+  });
+
+  test('Should return a list of musics with pagination', async () => {
+    const query = 'love';
+    const result = await sut.execute(query);
+
+    expect(result.data.length).toBe(3);
+    expect(result.page).toBe(1);
+    expect(result.perPage).toBe(12);
+    expect(result.total).toBe(1);
   });
 });
