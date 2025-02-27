@@ -19,4 +19,21 @@ export class FakePlaylistRepository implements PlaylistRepository {
   async delete(playlistId: string): Promise<void> {
     this.playlists = this.playlists.filter((p) => p.id !== playlistId);
   }
+
+  async update(
+    id: string,
+    ownerId: string,
+    name: string,
+    category: string,
+  ): Promise<void> {
+    const playlist = this.playlists.find((p) => p.id === id);
+    if (!playlist) return;
+
+    playlist.name = name;
+    playlist.category = category;
+  }
+
+  async findById(playlistId: string): Promise<Playlist | undefined> {
+    return this.playlists.find((p) => p.id === playlistId);
+  }
 }
