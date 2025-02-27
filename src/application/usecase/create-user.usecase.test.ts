@@ -39,4 +39,11 @@ describe('Create user', () => {
 
         expect(result).toBeUndefined()
     })
+
+    test('should return an error if email is already in use', async () => {
+        await sut.execute("John Doe", "email@sample.com", "password")
+        const err = await sut.execute("John Doe 2", "email@sample.com", "password2") as Error
+
+        expect(err.message).toBe("Email is already in use")
+    })
 })

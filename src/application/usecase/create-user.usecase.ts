@@ -25,6 +25,11 @@ export class CreateUserUseCase {
             return emailOrError
 
         const hashedPassword = await this.encrypter.encrypt(password)
+
+        const emailExists = await this.userRepository.findByEmail(email)
+        if (emailExists)
+            return new Error("Email is already in use")
+
         const user = new User(null, name, emailOrError, hashedPassword)
         await this.userRepository.save(user)
     }
