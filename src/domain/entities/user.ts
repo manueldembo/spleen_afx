@@ -13,4 +13,8 @@ export class User {
         this.email = email
         this.password = password
     }
+
+    verifyPassword(password: string): boolean {
+        return this.password === password
+    }
 }
