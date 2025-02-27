@@ -2,18 +2,27 @@ import { MusicRepository } from 'src/domain/repositores/music-repository.interfa
 import { describe } from 'vitest';
 import { AddMusicUseCase } from './add-music.usecase';
 import { FakeMusicRepository } from 'test/fake-music.repository';
-import { NotFoundError } from '../helpers/http.helper';
+import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
+import { FakePlaylistRepository } from 'test/fake-playlist.repository';
 
 describe('AddMusicUseCase', () => {
   let musicRepository: MusicRepository;
+  let playlistRepository: PlaylistRepository;
   let sut: AddMusicUseCase;
 
   beforeEach(() => {
     musicRepository = new FakeMusicRepository();
-    sut = new AddMusicUseCase(musicRepository);
+    playlistRepository = new FakePlaylistRepository();
+    sut = new AddMusicUseCase(musicRepository, playlistRepository);
   });
 
   test('Should return an error if music not found', async () => {
     await expect(sut.execute('1', 'xpto')).rejects.toThrow('Music not found');
+  });
+
+  test('Should return an error if playlist not found', async () => {
+    await expect(sut.execute('xpto', '1')).rejects.toThrow(
+      'Playlist not found',
+    );
   });
 });
