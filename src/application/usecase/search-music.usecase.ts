@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Music } from 'src/domain/entities/music';
 import { ListResult } from 'src/application/usecase/list-result';
 import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
 
 @Injectable()
 export class SearchMusicUseCase {
-  constructor(private readonly musicRepository: MusicRepository) {}
+  constructor(
+    @Inject('MusicRepository')
+    private readonly musicRepository: MusicRepository,
+  ) {}
 
   async execute(
     query: string,

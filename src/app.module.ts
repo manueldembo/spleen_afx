@@ -5,12 +5,14 @@ import { GlobalExceptionFilter } from './infra/error/global-exception.filter';
 import { AuthModule } from './infra/controllers/auth.module';
 import { PlaylistModule } from './infra/controllers/playlist.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MusicModule } from './infra/controllers/music.module';
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
     PlaylistModule,
+    MusicModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,

@@ -23,3 +23,13 @@ model PlayList {
   owner    User     @relation(fields: [ownerId], references: [id])
   songs    String[]
 }
+
+model Music {
+  id          String @id @default(cuid())
+  title       String
+  artist      String
+  genre       String
+  releaseYear Int
+  popularity  Int
+  fullText    String
+}
