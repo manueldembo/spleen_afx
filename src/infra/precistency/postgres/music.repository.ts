@@ -18,6 +18,12 @@ export class MusicRepositoryPostgres implements MusicRepository {
             contains: filters.artist,
             mode: 'insensitive',
           },
+          AND: {
+            fullText: {
+              contains: filters.genre,
+              mode: 'insensitive',
+            },
+          },
         },
       },
     });
