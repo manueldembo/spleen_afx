@@ -40,4 +40,35 @@ export class MusicRepositoryPostgres implements MusicRepository {
         ),
     );
   }
+
+  async findById(id: string): Promise<Music | undefined> {
+    const music = await prismaClient.music.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!music) return undefined;
+
+    return new Music(
+      music.id,
+      music.title,
+      music.artist,
+      music.genre,
+      music.releaseYear,
+      music.popularity,
+      music.fileUrl || undefined,
+    );
+  }
+
+  async update(musc: Music): Promise<void> {
+    await prismaClient.music.update({
+      where: {
+        id: musc.id,
+      },
+      data: {
+        fileUrl: musc.fileUrl,
+      },
+    });
+  }
 }

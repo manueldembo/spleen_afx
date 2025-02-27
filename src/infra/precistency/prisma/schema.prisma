@@ -32,4 +32,5 @@ model Music {
   releaseYear Int
   popularity  Int
   fullText    String
+  fileUrl     String?
 }
