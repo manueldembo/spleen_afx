@@ -1,5 +1,12 @@
+import { Email } from "src/domain/email"
+
 export class CreateUserUseCase {
-    execute(): Error {
-        return new Error("Name is required")
+    async execute(name: string, email: string): Promise<void | Error> {
+        if (name === "")
+            return new Error("Name is required")
+
+        const emailOrError = Email.create(email)        
+        if (emailOrError instanceof Error)
+            return emailOrError
     }
 }  
