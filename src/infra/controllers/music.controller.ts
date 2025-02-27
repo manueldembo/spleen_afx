@@ -5,12 +5,14 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { SearchMusicUseCase } from 'src/application/usecase/search-music.usecase';
 import { multerConfig } from '../multer.config';
 import { UploadMusicUseCase } from 'src/application/usecase/upload-musc.usecase';
+import { JWTGuard } from '../jwt.guard';
 
 @Controller('musics')
 export class MusicController {
@@ -34,6 +36,7 @@ export class MusicController {
     );
   }
 
+  @UseGuards(JWTGuard)
   @Post('upload/:id')
   @UseInterceptors(FileInterceptor('file', multerConfig))
   upload(@UploadedFile() file: Express.Multer.File, @Param('id') id: string) {

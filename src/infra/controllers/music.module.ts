@@ -3,6 +3,7 @@ import { MusicController } from './music.controller';
 import { SearchMusicUseCase } from 'src/application/usecase/search-music.usecase';
 import { MusicRepositoryPostgres } from '../precistency/postgres/music.repository';
 import { UploadMusicUseCase } from 'src/application/usecase/upload-musc.usecase';
+import { JWTGuard } from '../jwt.guard';
 
 @Module({
   controllers: [MusicController],
@@ -13,6 +14,7 @@ import { UploadMusicUseCase } from 'src/application/usecase/upload-musc.usecase'
       provide: 'MusicRepository',
       useClass: MusicRepositoryPostgres,
     },
+    JWTGuard,
   ],
 })
 export class MusicModule {}
