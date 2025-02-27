@@ -4,7 +4,7 @@ import { UserRepository } from "src/domain/repositores/user-repository.interface
 export class FakeUserRepository implements UserRepository {
     private users: User[] = []
 
-    async save(user: User): Promise<void | Error> {
+    async save(user: User): Promise<void> {
         this.users.push(user)
     }
 
