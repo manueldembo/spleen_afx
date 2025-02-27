@@ -28,4 +28,12 @@ export class FakePlaylistRepository implements PlaylistRepository {
   async findById(playlistId: string): Promise<Playlist | undefined> {
     return this.playlists.find((p) => p.id === playlistId);
   }
+
+  async addMusic(playlistId: string, musicId: string): Promise<void> {
+    this.playlists.find((p) => {
+      if (p.id == playlistId) {
+        p.songs.push(musicId);
+      }
+    });
+  }
 }

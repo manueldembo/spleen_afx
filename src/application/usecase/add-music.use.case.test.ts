@@ -25,4 +25,14 @@ describe('AddMusicUseCase', () => {
       'Playlist not found',
     );
   });
+
+  test('Should add music to playlist', async () => {
+    const playlistId = '1';
+    const musicId = '1';
+
+    await sut.execute(playlistId, '1');
+
+    const playlist = await playlistRepository.findById(playlistId);
+    expect(playlist?.songs[0]).toBe(musicId);
+  });
 });

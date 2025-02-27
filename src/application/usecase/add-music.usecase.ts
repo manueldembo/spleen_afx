@@ -18,5 +18,7 @@ export class AddMusicUseCase {
 
     const playlistFound = await this.playlistRepository.findById(playlistId);
     if (!playlistFound) throw NotFoundError('Playlist not found');
+
+    await this.playlistRepository.addMusic(playlistFound.id, musicFound.id);
   }
 }
