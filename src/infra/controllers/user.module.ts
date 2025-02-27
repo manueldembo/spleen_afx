@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { CreateUserUseCase } from 'src/application/usecase/create-user.usecase';
 import { BcryptAdapter } from '../bcrypt-adapter';
-import { FakeUserRepository } from 'test/fake-user.repository';
+import { UserRepositoryPostgres } from '../precistency/postgres/user.repository';
 
 @Module({
   controllers: [
@@ -12,7 +12,7 @@ import { FakeUserRepository } from 'test/fake-user.repository';
     CreateUserUseCase,
     {
       provide: 'UserRepository',
-      useClass: FakeUserRepository
+      useClass: UserRepositoryPostgres
     },
     {
         provide: 'Encrypter',
