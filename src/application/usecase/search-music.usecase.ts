@@ -1,7 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Music } from 'src/domain/entities/music';
 import { ListResult } from 'src/application/usecase/list-result';
-import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
+import {
+  Filter,
+  MusicRepository,
+} from 'src/domain/repositores/music-repository.interface';
 
 @Injectable()
 export class SearchMusicUseCase {
@@ -11,7 +14,7 @@ export class SearchMusicUseCase {
   ) {}
 
   async execute(
-    query: string,
+    { query = '', artist = '' }: Filter,
     page = 1,
     perPage = 12,
   ): Promise<ListResult<Music>> {
@@ -22,7 +25,10 @@ export class SearchMusicUseCase {
       perPage = 12;
     }
 
-    const musics = await this.musicRepository.search(query.toLocaleLowerCase());
+    const musics = await this.musicRepository.search({
+      query: query.toLowerCase(),
+      artist: artist.toLowerCase(),
+    });
 
     const totalItems = musics.length;
     const total = Math.ceil(totalItems / perPage);

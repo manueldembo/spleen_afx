@@ -21,6 +21,6 @@ export class Music {
     this.genre = genre;
     this.releaseYear = releaseYear;
     this.popularity = popularity;
-    this.fullText = `${title.toLowerCase()} ${artist.toLocaleLowerCase()} ${genre.toLocaleLowerCase()} ${releaseYear}`;
+    this.fullText = `${title.toLowerCase()} ${artist.toLowerCase()} ${genre.toLowerCase()} ${releaseYear}`;
   }
 }
