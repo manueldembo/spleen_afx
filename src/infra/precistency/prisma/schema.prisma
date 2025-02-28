@@ -12,20 +12,21 @@ model User {
   name     String
   email    String     @unique
   password String
-  PlayList PlayList[]
+  PlayList Playlist[]
 }
 
-model PlayList {
-  id       String   @id @default(cuid())
+model Playlist {
+  id       String          @id @default(cuid())
   name     String
   category String
   ownerId  String
-  owner    User     @relation(fields: [ownerId], references: [id])
-  songs    String[]
+  owner    User            @relation(fields: [ownerId], references: [id])
+  musics    PlaylistMusic[]
+	@@map("PlayList")
 }
 
 model Music {
-  id          String @id @default(cuid())
+  id          String          @id @default(cuid())
   title       String
   artist      String
   genre       String
@@ -33,4 +34,14 @@ model Music {
   popularity  Int
   fullText    String
   fileUrl     String?
+  playlists   PlaylistMusic[]
+}
+
+model PlaylistMusic {
+  playlistId String
+  musicId    String
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  music      Music    @relation(fields: [musicId], references: [id], onDelete: Cascade)
+
+  @@id([playlistId, musicId])
 }

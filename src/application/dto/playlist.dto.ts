@@ -9,3 +9,13 @@ export class PlaylistDTO {
   @IsString()
   category: string;
 }
+
+export class AddMusicDTO {
+  @IsNotEmpty()
+  @IsString()
+  playlistId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  musicId: string;
+}

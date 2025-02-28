@@ -4,19 +4,18 @@ import { prismaClient } from '../prisma.client';
 
 export class PlaylistRepositoryPostgres implements PlaylistRepository {
   async save(playlist: Playlist): Promise<void> {
-    await prismaClient.playList.create({
+    await prismaClient.playlist.create({
       data: {
         id: playlist.id,
         name: playlist.name,
         category: playlist.category,
         ownerId: playlist.ownerId,
-        songs: [],
       },
     });
   }
 
   async findAll(): Promise<Playlist[]> {
-    const playlists = await prismaClient.playList.findMany();
+    const playlists = await prismaClient.playlist.findMany();
     return playlists.map((playlist) => {
       return new Playlist(
         playlist.id,
@@ -28,7 +27,7 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
   }
 
   async delete(playlistId: string): Promise<void> {
-    await prismaClient.playList.delete({
+    await prismaClient.playlist.delete({
       where: {
         id: playlistId,
       },
@@ -36,7 +35,7 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
   }
 
   async findById(playlistId: string): Promise<Playlist | undefined> {
-    const playlist = await prismaClient.playList.findUnique({
+    const playlist = await prismaClient.playlist.findUnique({
       where: {
         id: playlistId,
       },
@@ -53,13 +52,22 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
   }
 
   async update(playlist: Playlist): Promise<void> {
-    await prismaClient.playList.update({
+    await prismaClient.playlist.update({
       where: {
         id: playlist.id,
       },
       data: {
         name: playlist.name,
         category: playlist.category,
+      },
+    });
+  }
+
+  async addMusic(playlistId: string, musicId: string): Promise<void> {
+    await prismaClient.playlistMusic.create({
+      data: {
+        playlistId,
+        musicId,
       },
     });
   }
