@@ -19,7 +19,7 @@ describe('RemoveMusicUseCase', () => {
       musicRepository,
       playlistRepository,
     )),
-      (sut = new RemoveMusicUseCase(musicRepository, playlistRepository));
+      (sut = new RemoveMusicUseCase(playlistRepository));
   });
 
   test('should remove a music from playlist', async () => {
@@ -31,5 +31,14 @@ describe('RemoveMusicUseCase', () => {
 
     const playlist = await playlistRepository.findById(playlistId);
     expect(playlist?.songs.length).toBe(0);
+  });
+
+  test('sould return an error if music not exist', async () => {
+    const playlistId = '1';
+    const musicId = '1';
+
+    await expect(sut.execute(playlistId, musicId)).rejects.toThrow(
+      'Music not exist',
+    );
   });
 });
