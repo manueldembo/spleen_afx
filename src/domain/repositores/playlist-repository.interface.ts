@@ -7,4 +7,5 @@ export interface PlaylistRepository {
   update(playlist: Playlist): Promise<void>;
   findById(playlistId: string): Promise<Playlist | undefined>;
   addMusic(playlistId: string, musicId: string): Promise<void>;
+  removeMusic(playlistId: string, musicId: string): Promise<void>;
 }

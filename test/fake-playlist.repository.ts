@@ -36,4 +36,12 @@ export class FakePlaylistRepository implements PlaylistRepository {
       }
     });
   }
+
+  async removeMusic(playlistId: string, musicId: string): Promise<void> {
+    this.playlists.find((p) => {
+      if (p.id === playlistId) {
+        p.songs = p.songs.filter((s) => s !== musicId);
+      }
+    });
+  }
 }
