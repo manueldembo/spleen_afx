@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { UploadMusicUseCase } from './upload-musc.usecase';
 import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
 import { FakeMusicRepository } from 'test/fake-music.repository';
-import { NotFoundError } from '../helpers/http.helper';
+import { NotFoundError } from '../../helpers/http.helper';
 
 describe('UploadMusicUseCase', () => {
   let musicRepository: MusicRepository;

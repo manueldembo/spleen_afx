@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
-import { BadRequestError, NotFoundError } from '../helpers/http.helper';
+import { BadRequestError, NotFoundError } from '../../helpers/http.helper';
 import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
 
 @Injectable()

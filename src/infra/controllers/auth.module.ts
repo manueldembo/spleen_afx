@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { BcryptAdapter } from '../bcrypt-adapter';
 import { UserRepositoryPostgres } from '../precistency/postgres/user.repository';
 import { AuthController } from './auth.controller';
-import { LoginUsecase } from 'src/application/usecase/login.usecase';
+import { LoginUsecase } from 'src/application/usecase/auth/login.usecase';
 import { JWTTokenService } from '../services/jwt.service';
 
 @Module({

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { MusicRepository } from 'src/domain/repositores/music-repository.interface';
-import { NotFoundError } from '../helpers/http.helper';
+import { NotFoundError } from '../../helpers/http.helper';
 
 @Injectable()
 export class UploadMusicUseCase {

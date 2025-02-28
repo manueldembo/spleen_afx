@@ -9,9 +9,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { SearchMusicUseCase } from 'src/application/usecase/search-music.usecase';
+import { SearchMusicUseCase } from 'src/application/usecase/music/search-music.usecase';
 import { multerConfig } from '../multer.config';
-import { UploadMusicUseCase } from 'src/application/usecase/upload-musc.usecase';
+import { UploadMusicUseCase } from 'src/application/usecase/music/upload-musc.usecase';
 import { JWTGuard } from '../jwt.guard';
 
 @Controller('musics')

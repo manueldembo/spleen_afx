@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Playlist } from 'src/domain/entities/playlist';
 import { PlaylistRepository } from 'src/domain/repositores/playlist-repository.interface';
-import { BadRequestError } from '../helpers/http.helper';
+import { BadRequestError } from '../../helpers/http.helper';
 
 @Injectable()
 export class CreatePlaylistUsecase {

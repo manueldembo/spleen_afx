@@ -9,11 +9,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { AddMusicDTO, PlaylistDTO } from 'src/application/dto/playlist.dto';
-import { CreatePlaylistUsecase } from 'src/application/usecase/create-playlist.usecase';
+import { CreatePlaylistUsecase } from 'src/application/usecase/playlist/create-playlist.usecase';
 import { JWTGuard } from '../jwt.guard';
-import { DeletePlaylistUseCase } from 'src/application/usecase/delte-playlist.usecase';
-import { UpdatePlaylistUseCase } from 'src/application/usecase/update-playlist.usecase';
-import { AddMusicUseCase } from 'src/application/usecase/add-music.usecase';
+import { DeletePlaylistUseCase } from 'src/application/usecase/playlist/delte-playlist.usecase';
+import { UpdatePlaylistUseCase } from 'src/application/usecase/playlist/update-playlist.usecase';
+import { AddMusicUseCase } from 'src/application/usecase/playlist/add-music.usecase';
 
 @Controller('playlists')
 export class PlaylistController {

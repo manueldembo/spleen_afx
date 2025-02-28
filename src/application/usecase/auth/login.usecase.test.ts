@@ -1,5 +1,5 @@
 import { describe, test, vi } from 'vitest';
-import { UnauthorizedError } from '../helpers/http.helper';
+import { UnauthorizedError } from '../../helpers/http.helper';
 import { LoginUsecase } from './login.usecase';
 import { UserRepository } from 'src/domain/repositores/user-repository.interface';
 import { FakeUserRepository } from 'test/fake-user.repository';
