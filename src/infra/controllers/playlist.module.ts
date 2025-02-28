@@ -7,6 +7,7 @@ import { DeletePlaylistUseCase } from 'src/application/usecase/playlist/delte-pl
 import { UpdatePlaylistUseCase } from 'src/application/usecase/playlist/update-playlist.usecase';
 import { AddMusicUseCase } from 'src/application/usecase/playlist/add-music.usecase';
 import { MusicRepositoryPostgres } from '../precistency/postgres/music.repository';
+import { RemoveMusicUseCase } from 'src/application/usecase/playlist/remove-music.usecase';
 
 @Module({
   controllers: [PlaylistController],
@@ -15,6 +16,7 @@ import { MusicRepositoryPostgres } from '../precistency/postgres/music.repositor
     DeletePlaylistUseCase,
     UpdatePlaylistUseCase,
     AddMusicUseCase,
+    RemoveMusicUseCase,
     {
       provide: 'PlaylistRepository',
       useClass: PlaylistRepositoryPostgres,

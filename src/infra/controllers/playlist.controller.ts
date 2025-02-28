@@ -14,6 +14,7 @@ import { JWTGuard } from '../jwt.guard';
 import { DeletePlaylistUseCase } from 'src/application/usecase/playlist/delte-playlist.usecase';
 import { UpdatePlaylistUseCase } from 'src/application/usecase/playlist/update-playlist.usecase';
 import { AddMusicUseCase } from 'src/application/usecase/playlist/add-music.usecase';
+import { RemoveMusicUseCase } from 'src/application/usecase/playlist/remove-music.usecase';
 
 @Controller('playlists')
 export class PlaylistController {
@@ -22,6 +23,7 @@ export class PlaylistController {
     private readonly deletePlaylistUseCase: DeletePlaylistUseCase,
     private readonly updatePlaylistUseCase: UpdatePlaylistUseCase,
     private readonly addMusicUseCase: AddMusicUseCase,
+    private readonly removeMusicUseCase: RemoveMusicUseCase,
   ) {}
 
   @UseGuards(JWTGuard)
@@ -51,5 +53,14 @@ export class PlaylistController {
   @Post('add')
   async addMusic(@Body() input: AddMusicDTO) {
     await this.addMusicUseCase.execute(input.playlistId, input.musicId);
+  }
+
+  @UseGuards(JWTGuard)
+  @Delete(':id/music/:musicId')
+  async removeMusic(
+    @Param('id') playlistId: string,
+    @Param('musicId') musicId: string,
+  ) {
+    await this.removeMusicUseCase.execute(playlistId, musicId);
   }
 }

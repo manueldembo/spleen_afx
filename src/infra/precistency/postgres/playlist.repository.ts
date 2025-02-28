@@ -39,6 +39,13 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
       where: {
         id: playlistId,
       },
+      include: {
+        musics: {
+          include: {
+            music: true,
+          },
+        },
+      },
     });
 
     if (!playlist) return undefined;
@@ -48,6 +55,7 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
       playlist.name,
       playlist.category,
       playlist.ownerId,
+      playlist.musics.map((m) => m.musicId),
     );
   }
 
@@ -68,6 +76,17 @@ export class PlaylistRepositoryPostgres implements PlaylistRepository {
       data: {
         playlistId,
         musicId,
+      },
+    });
+  }
+
+  async removeMusic(playlistId: string, musicId: string): Promise<void> {
+    await prismaClient.playlistMusic.delete({
+      where: {
+        playlistId_musicId: {
+          playlistId,
+          musicId,
+        },
       },
     });
   }
